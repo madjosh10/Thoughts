@@ -93,6 +93,13 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="C8Q-sY-uCw" secondAttribute="trailing" id="zRj-ZP-rgm"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="likesImage" destination="a8L-2M-vlF" id="heI-XS-t8f"/>
+                                            <outlet property="likesNumberLbl" destination="00U-FU-fi8" id="SoJ-eY-vcM"/>
+                                            <outlet property="thoughtTxtLbl" destination="C8Q-sY-uCw" id="IWB-a9-59q"/>
+                                            <outlet property="timestampLbl" destination="uRB-EB-nBP" id="Al1-Ej-J7V"/>
+                                            <outlet property="usernameLbl" destination="7hn-CZ-7dC" id="tYe-XB-L3J"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
