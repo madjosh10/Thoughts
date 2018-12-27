@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Firebase
 
 
 class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -18,6 +18,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // Variables
     private var thoughts = [Thought]()
+    private var thoughtsCollectionRef: CollectionReference!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,36 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         tableView.estimatedRowHeight = 80
         tableView.rowHeight = UITableView.automaticDimension
         
+        thoughtsCollectionRef = Firestore.firestore().collection(THOUGHTS_REF)
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        thoughtsCollectionRef.getDocuments { (snapshot, error) in
+            if let err = error {
+                debugPrint("Error fetching Docs: \(err)")
+                
+            } else {
+                guard let snap = snapshot else { return }
+                for document in snap.documents {
+                    let data = document.data()
+                    let username = data[USERNAME] as? String ?? "Anonymous"
+                    let timestamp = data[TIMESTAMP] as? Date ?? Date()
+                    let thoughtText = data[THOUGHT_TXT] as? String ?? ""
+                    let numLikes = data[NUM_LIKE] as? Int ?? 0
+                    let numComments = data[NUM_COMMENTS] as? Int ?? 0
+                    let documentId = document.documentID
+                    
+                    let newThought = Thought(username: username, timestamp: timestamp, thoughtText: thoughtText, numLikes: numLikes, numComments: numComments, documentId: documentId)
+                    self.thoughts.append(newThought)
+                    
+                    self.tableView.reloadData()
+                    
+                }
+                
+            }
+            
+        }
         
     }
     
