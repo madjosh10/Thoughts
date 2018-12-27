@@ -9,6 +9,13 @@
 import UIKit
 import Firebase
 
+enum ThoughtCategory : String {
+    case serious = "serious"
+    case funny = "funny"
+    case crazy = "crazy"
+    case popular = "popular"
+    
+}
 
 class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -19,10 +26,12 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // Variables
     private var thoughts = [Thought]()
     private var thoughtsCollectionRef: CollectionReference!
+    private var thoughtsListener: ListenerRegistration!
+    private var selectedCategory = ThoughtCategory.funny.rawValue
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self as UITableViewDelegate
+        tableView.delegate = self
         tableView.dataSource = self
         tableView.estimatedRowHeight = 80
         tableView.rowHeight = UITableView.automaticDimension
@@ -31,32 +40,69 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        thoughtsCollectionRef.getDocuments { (snapshot, error) in
-            if let err = error {
-                debugPrint("Error fetching Docs: \(err)")
-                
-            } else {
-                guard let snap = snapshot else { return }
-                for document in snap.documents {
-                    let data = document.data()
-                    let username = data[USERNAME] as? String ?? "Anonymous"
-                    let timestamp = data[TIMESTAMP] as? Date ?? Date()
-                    let thoughtText = data[THOUGHT_TXT] as? String ?? ""
-                    let numLikes = data[NUM_LIKE] as? Int ?? 0
-                    let numComments = data[NUM_COMMENTS] as? Int ?? 0
-                    let documentId = document.documentID
-                    
-                    let newThought = Thought(username: username, timestamp: timestamp, thoughtText: thoughtText, numLikes: numLikes, numComments: numComments, documentId: documentId)
-                    self.thoughts.append(newThought)
-                    
-                    self.tableView.reloadData()
-                    
-                }
-                
-            }
-            
+    @IBAction func categoryChanged(_ sender: Any) {
+        switch segmentControl.selectedSegmentIndex {
+            case 0:
+                selectedCategory = ThoughtCategory.funny.rawValue
+            case 1:
+                selectedCategory = ThoughtCategory.serious.rawValue
+            case 2:
+                selectedCategory = ThoughtCategory.crazy.rawValue
+            default:
+                selectedCategory = ThoughtCategory.popular.rawValue
         }
+        
+        thoughtsListener.remove()
+        setListener()
+}
+    
+    
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setListener()
+
+    }
+    
+    func setListener() {
+        
+        if selectedCategory == ThoughtCategory.popular.rawValue {
+            thoughtsListener = thoughtsCollectionRef
+                .order(by: NUM_LIKE, descending: true)
+                .addSnapshotListener { (snapshot, error) in
+                    if let err = error {
+                        debugPrint("Error fetching Docs: \(err)")
+                        
+                    } else {
+                        
+                        self.thoughts.removeAll()
+                        self.thoughts = Thought.parseData(snapshot: snapshot)
+                        self.tableView.reloadData()
+                        
+                    }
+            }
+        } else {
+            thoughtsListener = thoughtsCollectionRef
+                .whereField(CATEGORY, isEqualTo: selectedCategory)
+                .order(by: TIMESTAMP, descending: true)
+                .addSnapshotListener { (snapshot, error) in
+                    if let err = error {
+                        debugPrint("Error fetching Docs: \(err)")
+                        
+                    } else {
+                        
+                        self.thoughts.removeAll()
+                        self.thoughts = Thought.parseData(snapshot: snapshot)
+                        self.tableView.reloadData()
+                        
+                    }
+            }
+        }
+        
+    } // end setListener()
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        thoughtsListener.remove()
         
     }
     
@@ -80,10 +126,3 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
 } // end MainVC class
 
-enum ThoughtCategory : String {
-    case serious = "Serious"
-    case funny = "Funny"
-    case crazy = "Crazy"
-    case popular = "Popular"
-
-}

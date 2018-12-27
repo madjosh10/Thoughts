@@ -40,12 +40,12 @@ class AddThoughtVC: UIViewController, UITextViewDelegate {
     
     @IBAction func categoryChanged(_ sender: Any) {
         switch categorySegment.selectedSegmentIndex {
-        case 0:
-            selectedCategory = ThoughtCategory.funny.rawValue
-        case 1:
-            selectedCategory = ThoughtCategory.serious.rawValue
-        default:
-            selectedCategory = ThoughtCategory.crazy.rawValue
+            case 0:
+                selectedCategory = ThoughtCategory.funny.rawValue
+            case 1:
+                selectedCategory = ThoughtCategory.serious.rawValue
+            default:
+                selectedCategory = ThoughtCategory.crazy.rawValue
         }
         
     }
@@ -54,7 +54,7 @@ class AddThoughtVC: UIViewController, UITextViewDelegate {
         guard let username = userNameTxt.text else { return }
         
         Firestore.firestore().collection(THOUGHTS_REF).addDocument(data: [
-            THOUGHTS_REF : selectedCategory,
+            CATEGORY : selectedCategory,
             NUM_COMMENTS : 0,
             NUM_LIKE : 0,
             THOUGHT_TXT: thoughtText.text,

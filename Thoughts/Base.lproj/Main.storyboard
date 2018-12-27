@@ -21,16 +21,20 @@
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Sd7-r1-jB5">
                                 <rect key="frame" x="20" y="80" width="335" height="29"/>
                                 <segments>
-                                    <segment title="Funny"/>
-                                    <segment title="Serious"/>
-                                    <segment title="Crazy"/>
-                                    <segment title="Popular"/>
+                                    <segment title="funny"/>
+                                    <segment title="serious"/>
+                                    <segment title="crazy"/>
+                                    <segment title="popular"/>
                                 </segments>
                                 <color key="tintColor" red="1" green="0.50980392159999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="categoryChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="prV-Gx-YkR"/>
+                                </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KSS-cz-KX6">
                                 <rect key="frame" x="0.0" y="124" width="375" height="543"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" red="1" green="0.50980392159999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="thoughtCell" rowHeight="96" id="bmF-8a-DCr" customClass="ThoughtCell" customModule="Thoughts" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="96"/>
@@ -146,9 +150,9 @@
                                     <constraint firstAttribute="height" constant="32" id="jDd-jX-Yks"/>
                                 </constraints>
                                 <segments>
-                                    <segment title="Funny"/>
-                                    <segment title="Serious"/>
-                                    <segment title="Crazy"/>
+                                    <segment title="funny"/>
+                                    <segment title="serious"/>
+                                    <segment title="crazy"/>
                                 </segments>
                                 <color key="tintColor" red="1" green="0.50980392159999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
