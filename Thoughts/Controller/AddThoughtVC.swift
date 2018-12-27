@@ -17,7 +17,7 @@ class AddThoughtVC: UIViewController, UITextViewDelegate {
     @IBOutlet weak var postBtn: UIButton!
     
     // Variables
-    private var selectedCategory = "funny"
+    private var selectedCategory = ThoughtCategory.funny.rawValue
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,27 +39,36 @@ class AddThoughtVC: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func categoryChanged(_ sender: Any) {
-        
+        switch categorySegment.selectedSegmentIndex {
+        case 0:
+            selectedCategory = ThoughtCategory.funny.rawValue
+        case 1:
+            selectedCategory = ThoughtCategory.serious.rawValue
+        default:
+            selectedCategory = ThoughtCategory.crazy.rawValue
+        }
         
     }
     
     @IBAction func postBtnClicked(_ sender: Any) {
-        Firestore.firestore().collection("thoughts").addDocument(data: [
-            "category" : selectedCategory,
-            "numComments" : 0,
-            "numLikes" : 0,
-            "thoughtText": thoughtText.text,
-            "timestamp" : FieldValue.serverTimestamp(),
-            "username" : userNameTxt.text!
+        guard let username = userNameTxt.text else { return }
+        
+        Firestore.firestore().collection(THOUGHTS_REF).addDocument(data: [
+            THOUGHTS_REF : selectedCategory,
+            NUM_COMMENTS : 0,
+            NUM_LIKE : 0,
+            THOUGHT_TXT: thoughtText.text,
+            TIMESTAMP : FieldValue.serverTimestamp(),
+            USERNAME : username
             
             ]) { (err) in
-                if let err = err {
-                    debugPrint("Error adding document: \(err)")
+            if let err = err {
+                debugPrint("Error adding document: \(err)")
                     
-                } else {
-                    self.navigationController?.popViewController(animated: true)
+            } else {
+                self.navigationController?.popViewController(animated: true)
                     
-                }
+            }
         }
         
         

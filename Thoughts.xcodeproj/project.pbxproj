@@ -15,6 +15,7 @@
 		423D6CAC21D4413000F3856F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 423D6CAA21D4413000F3856F /* LaunchScreen.storyboard */; };
 		423D6CB421D4424500F3856F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 423D6CB321D4424500F3856F /* GoogleService-Info.plist */; };
 		42A4DCDA21D44D250092C76D /* AddThoughtVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A4DCD921D44D250092C76D /* AddThoughtVC.swift */; };
+		42A4DCDD21D461A50092C76D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A4DCDC21D461A50092C76D /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		423D6CAD21D4413000F3856F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		423D6CB321D4424500F3856F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		42A4DCD921D44D250092C76D /* AddThoughtVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddThoughtVC.swift; sourceTree = "<group>"; };
+		42A4DCDC21D461A50092C76D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		9C8875387BC22D603663BE27 /* Pods-Thoughts.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thoughts.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Thoughts/Pods-Thoughts.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -65,6 +67,7 @@
 		423D6CA021D4412C00F3856F /* Thoughts */ = {
 			isa = PBXGroup;
 			children = (
+				42A4DCDB21D461960092C76D /* Utilities */,
 				42A4DCD821D44C770092C76D /* Model */,
 				42A4DCD721D44C6E0092C76D /* View */,
 				42A4DCD621D44C580092C76D /* Controller */,
@@ -100,6 +103,14 @@
 			children = (
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		42A4DCDB21D461960092C76D /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				42A4DCDC21D461A50092C76D /* Constants.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		4593FBF84210DD5C3B4068E9 /* Pods */ = {
@@ -266,6 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				42A4DCDA21D44D250092C76D /* AddThoughtVC.swift in Sources */,
+				42A4DCDD21D461A50092C76D /* Constants.swift in Sources */,
 				423D6CA421D4412D00F3856F /* MainVC.swift in Sources */,
 				423D6CA221D4412D00F3856F /* AppDelegate.swift in Sources */,
 			);

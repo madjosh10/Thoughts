@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 class MainVC: UIViewController {
 
     override func viewDidLoad() {
@@ -18,3 +20,10 @@ class MainVC: UIViewController {
 
 }
 
+enum ThoughtCategory : String {
+    case serious = "Serious"
+    case funny = "Funny"
+    case crazy = "Crazy"
+    case popular = "Popular"
+
+}
