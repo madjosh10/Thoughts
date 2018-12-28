@@ -18,6 +18,9 @@
 		42A4DCDD21D461A50092C76D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A4DCDC21D461A50092C76D /* Constants.swift */; };
 		42A4DCDF21D466F10092C76D /* Thought.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A4DCDE21D466F10092C76D /* Thought.swift */; };
 		42A4DCE121D469CF0092C76D /* ThoughtCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A4DCE021D469CF0092C76D /* ThoughtCell.swift */; };
+		42A4DCE321D5870C0092C76D /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A4DCE221D5870C0092C76D /* RoundButton.swift */; };
+		42A4DCE521D58AA40092C76D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A4DCE421D58AA40092C76D /* LoginVC.swift */; };
+		42A4DCE721D594320092C76D /* CreateUserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A4DCE621D594320092C76D /* CreateUserVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +38,9 @@
 		42A4DCDC21D461A50092C76D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		42A4DCDE21D466F10092C76D /* Thought.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thought.swift; sourceTree = "<group>"; };
 		42A4DCE021D469CF0092C76D /* ThoughtCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThoughtCell.swift; sourceTree = "<group>"; };
+		42A4DCE221D5870C0092C76D /* RoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
+		42A4DCE421D58AA40092C76D /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		42A4DCE621D594320092C76D /* CreateUserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserVC.swift; sourceTree = "<group>"; };
 		9C8875387BC22D603663BE27 /* Pods-Thoughts.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thoughts.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Thoughts/Pods-Thoughts.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -90,6 +96,8 @@
 			children = (
 				423D6CA321D4412D00F3856F /* MainVC.swift */,
 				42A4DCD921D44D250092C76D /* AddThoughtVC.swift */,
+				42A4DCE421D58AA40092C76D /* LoginVC.swift */,
+				42A4DCE621D594320092C76D /* CreateUserVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -114,6 +122,7 @@
 		42A4DCDB21D461960092C76D /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				42A4DCE221D5870C0092C76D /* RoundButton.swift */,
 				42A4DCDC21D461A50092C76D /* Constants.swift */,
 			);
 			path = Utilities;
@@ -284,8 +293,11 @@
 			files = (
 				42A4DCDA21D44D250092C76D /* AddThoughtVC.swift in Sources */,
 				42A4DCDF21D466F10092C76D /* Thought.swift in Sources */,
+				42A4DCE521D58AA40092C76D /* LoginVC.swift in Sources */,
+				42A4DCE321D5870C0092C76D /* RoundButton.swift in Sources */,
 				42A4DCDD21D461A50092C76D /* Constants.swift in Sources */,
 				42A4DCE121D469CF0092C76D /* ThoughtCell.swift in Sources */,
+				42A4DCE721D594320092C76D /* CreateUserVC.swift in Sources */,
 				423D6CA421D4412D00F3856F /* MainVC.swift in Sources */,
 				423D6CA221D4412D00F3856F /* AppDelegate.swift in Sources */,
 			);
