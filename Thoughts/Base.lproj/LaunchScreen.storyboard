@@ -18,15 +18,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© Joshua Madrigal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yM6-0H-dS2">
-                                <rect key="frame" x="138" y="633" width="99" height="14"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© MM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yM6-0H-dS2">
+                                <rect key="frame" x="171.5" y="633" width="32" height="14"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" red="0.95294117649999999" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iTunesArtwork" translatesAutoresizingMaskIntoConstraints="NO" id="qdc-p2-qQn">
+                                <rect key="frame" x="-68.5" y="77.5" width="512" height="512"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.2117426097" green="0.21177878980000001" blue="0.2117346823" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="qdc-p2-qQn" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="A9F-1N-5tG"/>
+                            <constraint firstItem="qdc-p2-qQn" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="MIe-5o-Q8m"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="yM6-0H-dS2" secondAttribute="bottom" constant="20" id="kOf-hr-Tpn"/>
                             <constraint firstItem="yM6-0H-dS2" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="z4J-rA-1iJ"/>
                         </constraints>
@@ -38,4 +43,7 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="iTunesArtwork" width="512" height="512"/>
+    </resources>
 </document>

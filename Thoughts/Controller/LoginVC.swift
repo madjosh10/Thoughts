@@ -22,9 +22,20 @@ class LoginVC: UIViewController {
     }
     
     @IBAction func loginClicked(_ sender: Any) {
+        guard let email = emailTextField.text, let password = passwordTextField.text else {return}
+        
+        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+            if let error = error {
+                debugPrint("Error signing in: \(error.localizedDescription)")
+                
+            } else {
+                self.dismiss(animated: true, completion: nil)
+                
+            }
+        }
         
         
-    }
+    } // end loginClicked()
     
     @IBAction func createUserClicked(_ sender: Any) {
         performSegue(withIdentifier: "goToCreateUser", sender: self)
