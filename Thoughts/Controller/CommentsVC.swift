@@ -23,6 +23,7 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var thoughtRef: DocumentReference!
     let firestore = Firestore.firestore()
     var username: String!
+    var commentListener : ListenerRegistration!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +36,24 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
         
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        commentListener = firestore.collection(THOUGHTS_REF).document(self.thought.documentId).collection(COMMENTS_REF)
+            .addSnapshotListener({ (snapshot, error) in
+                guard let snapshot = snapshot else {
+                    debugPrint("Error fetching comments: \(error!)")
+                    return
+                }
+                
+                self.comments = Comment.parseData(snapshot: snapshot)
+                
+                
+        })
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        commentListener.remove()
     }
     
     @IBAction func addCommentClicked(_ sender: Any) {
