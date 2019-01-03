@@ -35,21 +35,27 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             username = name
         }
         
+        self.view.bindToKeyboard()
+        
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        commentListener = firestore.collection(THOUGHTS_REF).document(self.thought.documentId).collection(COMMENTS_REF)
-            .addSnapshotListener({ (snapshot, error) in
-                guard let snapshot = snapshot else {
-                    debugPrint("Error fetching comments: \(error!)")
+        commentListener = firestore.collection(THOUGHTS_REF)
+        .document(self.thought.documentId)
+            .collection(COMMENTS_REF).addSnapshotListener({ (snapshot, error) in
+                
+                guard let snap = snapshot else {
+                    debugPrint("Error Fetching Comments: \(error!)")
                     return
                 }
                 
-                self.comments = Comment.parseData(snapshot: snapshot)
-                
-                
-        })
+                self.comments.removeAll()
+                self.comments = Comment.parseData(snapshot: snap)
+                self.tableView.reloadData()
+            })
+        
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -64,27 +70,33 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             let thoughtDocument: DocumentSnapshot
             
             do {
-                try thoughtDocument = transaction.getDocument(Firestore.firestore().collection(THOUGHTS_REF).document(self.thought.documentId))
-                
+                try thoughtDocument = transaction.getDocument(self.firestore
+                    .collection(THOUGHTS_REF)
+                    .document(self.thought.documentId))
                 
             } catch let error as NSError {
-                debugPrint("*********Fetch Error: \(error.localizedDescription)")
+                debugPrint("Fetch Error: \(error.localizedDescription)")
                 return nil
-                
             }
             
             guard let oldNumComments = thoughtDocument.data()?[NUM_COMMENTS] as? Int else { return nil }
             
-            transaction.updateData([NUM_COMMENTS : oldNumComments + 1], forDocument: self.thoughtRef)
+            transaction.updateData([
+                NUM_COMMENTS : oldNumComments + 1
+                ], forDocument: self.thoughtRef)
             
-            let newCommentRef = self.firestore.collection(THOUGHTS_REF).document(self.thought.documentId).collection(COMMENTS_REF).document()
+            let newCommentRef = self.firestore.collection(THOUGHTS_REF)
+            .document(self.thought.documentId)
+            .collection(COMMENTS_REF)
+            .document()
             
             transaction.setData([
+                USERNAME : self.username,
                 COMMENT_TXT : commentText,
-                TIMESTAMP: FieldValue.serverTimestamp(),
-                USERNAME: self.username
-                ]
-                , forDocument: newCommentRef)
+                TIMESTAMP : FieldValue.serverTimestamp(),
+                ], forDocument: newCommentRef)
+            
+            
             
             return nil
         }) { (object, error) in
@@ -92,11 +104,12 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 debugPrint("Transaction Failed: \(error)")
             } else {
                 self.addCommentText.text = ""
+                self.addCommentText.resignFirstResponder()
                 
             }
         }
         
-    }
+    } // end addCommentClicked()
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return comments.count

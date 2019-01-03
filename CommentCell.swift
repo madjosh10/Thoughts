@@ -21,7 +21,7 @@ class CommentCell: UITableViewCell {
         commentText.text = comment.commentText
         
         let formatter = DateFormatter()
-        formatter.dateFormat = "MMM D, hh:mm"
+        formatter.dateFormat = "MMM d, hh:mm"
         let timestamp = formatter.string(from: comment.timestamp)
         timeStampText.text = timestamp
     }

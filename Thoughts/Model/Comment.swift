@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+
 class Comment {
     
     private(set) var username: String!
@@ -31,14 +32,12 @@ class Comment {
             let data = document.data()
             let username = data[USERNAME] as? String ?? "Anonymous"
             let timestamp = data[TIMESTAMP] as? Date ?? Date()
-            let commentText = data[THOUGHT_TXT] as? String ?? ""
+            let commentText = data[COMMENT_TXT] as? String ?? ""
             
 
             let newComment = Comment(username: username, timestamp: timestamp, commentText: commentText)
             comments.append(newComment)
         }
-
-
 
         return comments
 
