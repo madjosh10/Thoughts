@@ -18,7 +18,13 @@ enum ThoughtCategory : String {
 }
 
 
-class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, ThoughtDelegate {
+    // Protocol Delegate for ThoughtDelegate
+    func thoughtOptionsTapped(thought: Thought) {
+        // create alert to handle deletion
+        
+    }
+    
     
     // IBOutlets
     @IBOutlet private weak var segmentControl: UISegmentedControl!
@@ -139,7 +145,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "thoughtCell", for: indexPath) as? ThoughtCell {
-            cell.configureCell(thought: thoughts[indexPath.row])
+            cell.configureCell(thought: thoughts[indexPath.row], delegate: self)
             return cell
             
         }

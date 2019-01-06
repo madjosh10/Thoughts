@@ -223,6 +223,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="commentText" destination="0Nj-9y-aYE" id="HeD-Pe-RS0"/>
+                                            <outlet property="optionsMenu" destination="9Ma-vB-TFi" id="7Vx-Ie-1nr"/>
                                             <outlet property="timeStampText" destination="afz-K1-Xs1" id="Y09-6z-5n0"/>
                                             <outlet property="userNameText" destination="Kcd-PU-Z77" id="FVy-Fo-q2b"/>
                                         </connections>
