@@ -94,6 +94,7 @@ class CommentsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 USERNAME : self.username,
                 COMMENT_TXT : commentText,
                 TIMESTAMP : FieldValue.serverTimestamp(),
+                USER_ID: Auth.auth().currentUser?.uid ?? ""
                 ], forDocument: newCommentRef)
             
             
