@@ -129,7 +129,7 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.32153749465942383" green="0.32158857583999634" blue="0.32152628898620605" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KSS-cz-KX6" secondAttribute="trailing" id="26B-9u-cw2"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="KSS-cz-KX6" secondAttribute="bottom" id="3hh-Kl-FQ6"/>
