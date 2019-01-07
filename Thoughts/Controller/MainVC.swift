@@ -19,11 +19,6 @@ enum ThoughtCategory : String {
 
 
 class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, ThoughtDelegate {
-    // Protocol Delegate for ThoughtDelegate
-    func thoughtOptionsTapped(thought: Thought) {
-        // create alert to handle deletion
-        
-    }
     
     
     // IBOutlets
@@ -70,6 +65,65 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Thou
         }
         
     }
+    
+    // Protocol Delegate for ThoughtDelegate
+    func thoughtOptionsTapped(thought: Thought) {
+        // create alert to handle deletion
+        let alert = UIAlertController(title: "Delete", message: "Do you want to delete your thought?", preferredStyle: .actionSheet)
+        let deleteAction = UIAlertAction(title: "Delete Thought", style: .default) { (error) in
+            
+            self.delete(collection: Firestore.firestore().collection(THOUGHTS_REF).document(thought.documentId).collection(COMMENTS_REF), completion: { (error) in
+                if let error = error {
+                    debugPrint("Could not delete sub collection within thought: \(error.localizedDescription)")
+                } else {
+                    Firestore.firestore().collection(THOUGHTS_REF).document(thought.documentId).delete(completion: { (error) in
+                        if let error = error {
+                            debugPrint("Could not delete thought: \(error.localizedDescription)")
+                        } else {
+                            self.dismiss(animated: true, completion: nil)
+                        }
+                    })
+                    
+                }
+            })
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func delete(collection: CollectionReference, batchSize: Int = 100, completion: @escaping (Error?) -> ()) {
+        
+        collection.limit(to: batchSize).getDocuments { (docset, error) in
+            guard let docset = docset else {
+                completion(error)
+                return
+            }
+            
+            guard docset.count > 0 else {
+                completion(nil)
+                return
+            }
+            
+            let batch = collection.firestore.batch()
+            docset.documents.forEach { batch.deleteDocument($0.reference) }
+            
+            batch.commit { (batchError) in
+             
+                if let batchError = batchError {
+                    completion(batchError)
+                } else {
+                    self.delete(collection: collection, batchSize: batchSize ,completion: completion)
+                }
+                
+            }
+            
+        } // end collections limits
+        
+    } // end delete()
+    
     
     
     @IBAction func categoryChanged(_ sender: Any) {
